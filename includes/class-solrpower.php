@@ -159,7 +159,7 @@ class SolrPower {
 			return $links;
 		}
 
-		$base_link     = is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' );
+		$base_link     = is_network_admin() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' );
 		$settings_link = add_query_arg( 'page', 'solr-power', $base_link );
 		array_unshift( $links, '<a href="' . esc_url( $settings_link ) . '">' . esc_html__( 'Settings', 'solr-for-wordpress-on-pantheon' ) . '</a>' );
 

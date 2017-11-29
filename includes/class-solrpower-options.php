@@ -41,7 +41,7 @@ class SolrPower_Options {
 	 * Instantiate the options object
 	 */
 	function __construct() {
-		$menu_action = is_multisite() ? 'network_admin_menu' : 'admin_menu';
+		$menu_action = is_network_admin() ? 'network_admin_menu' : 'admin_menu';
 		add_action( $menu_action, array( $this, 'add_pages' ) );
 		add_action( 'wp_ajax_solr_options', array( $this, 'options_load' ) );
 		add_action( 'admin_init', array( $this, 'check_for_actions' ) );
@@ -159,7 +159,7 @@ class SolrPower_Options {
 	 */
 	function get_option() {
 		$option = 'plugin_s4wp_settings';
-		if ( is_multisite() ) {
+		if ( is_network_admin() ) {
 			return get_site_option( $option );
 		} else {
 			return get_option( $option );
@@ -174,7 +174,7 @@ class SolrPower_Options {
 	function update_option( $options ) {
 		$optval = $this->sanitise_options( $options );
 		$option = 'plugin_s4wp_settings';
-		if ( is_multisite() ) {
+		if ( is_network_admin() ) {
 			update_site_option( $option, $optval );
 		} else {
 			update_option( $option, $optval );
@@ -210,7 +210,7 @@ class SolrPower_Options {
 		$clean['s4wp_facet_on_author']     = absint( $options['s4wp_facet_on_author'] );
 		$clean['s4wp_facet_on_type']       = absint( $options['s4wp_facet_on_type'] );
 		$clean['s4wp_facet_on_taxonomy']   = absint( $options['s4wp_facet_on_taxonomy'] );
-		if ( is_multisite() ) {
+		if ( is_network_admin() ) {
 			$clean['s4wp_index_all_sites'] = absint( $options['s4wp_index_all_sites'] );
 		}
 		$clean['s4wp_index_custom_fields']    = $this->filter_str2list( $options['s4wp_index_custom_fields'] );
